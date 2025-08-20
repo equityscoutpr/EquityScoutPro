@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deals - EquityScoutPro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .deals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .deal-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .deal-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .deal-image {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .deal-content {
+            padding: 1.5rem;
+        }
+
+        .deal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .deal-location {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .deal-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .deal-details {
+            margin-bottom: 1rem;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-label {
+            color: #666;
+        }
+
+        .detail-value {
+            font-weight: 500;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .deals-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">EquityScoutPro</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="deals.html">Deals</a></li>
+                <li><a href="colorado-properties/">CO Properties</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Investment Deals</h1>
+            <p>Curated real estate investment opportunities with detailed analysis</p>
+        </div>
+
+        <div class="deals-grid">
+            <div class="deal-card">
+                <div class="deal-image">🏠</div>
+                <div class="deal-content">
+                    <div class="deal-title">Denver Duplex Opportunity</div>
+                    <div class="deal-location">Capitol Hill, Denver, CO</div>
+                    
+                    <div class="deal-stats">
+                        <div class="stat">
+                            <div class="stat-value">$485,000</div>
+                            <div class="stat-label">Purchase Price</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">18.5%</div>
+                            <div class="stat-label">IRR</div>
+                        </div>
+                    </div>
+
+                    <div class="deal-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Property Type:</span>
+                            <span class="detail-value">Duplex</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Square Feet:</span>
+                            <span class="detail-value">2,400 sq ft</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Rental Income:</span>
+                            <span class="detail-value">$3,200/month</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Cap Rate:</span>
+                            <span class="detail-value">7.9%</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn">View Details</a>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">🏢</div>
+                <div class="deal-content">
+                    <div class="deal-title">Boulder Commercial Space</div>
+                    <div class="deal-location">Pearl Street, Boulder, CO</div>
+                    
+                    <div class="deal-stats">
+                        <div class="stat">
+                            <div class="stat-value">$750,000</div>
+                            <div class="stat-label">Purchase Price</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">22.3%</div>
+                            <div class="stat-label">IRR</div>
+                        </div>
+                    </div>
+
+                    <div class="deal-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Property Type:</span>
+                            <span class="detail-value">Commercial</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Square Feet:</span>
+                            <span class="detail-value">1,800 sq ft</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Rental Income:</span>
+                            <span class="detail-value">$5,500/month</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Cap Rate:</span>
+                            <span class="detail-value">8.8%</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn">View Details</a>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">🏘️</div>
+                <div class="deal-content">
+                    <div class="deal-title">Lakewood Family Home</div>
+                    <div class="deal-location">Belmar, Lakewood, CO</div>
+                    
+                    <div class="deal-stats">
+                        <div class="stat">
+                            <div class="stat-value">$425,000</div>
+                            <div class="stat-label">Purchase Price</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">16.2%</div>
+                            <div class="stat-label">IRR</div>
+                        </div>
+                    </div>
+
+                    <div class="deal-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Property Type:</span>
+                            <span class="detail-value">Single Family</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Square Feet:</span>
+                            <span class="detail-value">1,650 sq ft</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Rental Income:</span>
+                            <span class="detail-value">$2,800/month</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Cap Rate:</span>
+                            <span class="detail-value">7.9%</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn">View Details</a>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">🏠</div>
+                <div class="deal-content">
+                    <div class="deal-title">Fort Collins Townhome</div>
+                    <div class="deal-location">Old Town, Fort Collins, CO</div>
+                    
+                    <div class="deal-stats">
+                        <div class="stat">
+                            <div class="stat-value">$395,000</div>
+                            <div class="stat-label">Purchase Price</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">19.1%</div>
+                            <div class="stat-label">IRR</div>
+                        </div>
+                    </div>
+
+                    <div class="deal-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Property Type:</span>
+                            <span class="detail-value">Townhome</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Square Feet:</span>
+                            <span class="detail-value">1,450 sq ft</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Rental Income:</span>
+                            <span class="detail-value">$2,650/month</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Cap Rate:</span>
+                            <span class="detail-value">8.1%</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn">View Details</a>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">🏢</div>
+                <div class="deal-content">
+                    <div class="deal-title">Colorado Springs Condo</div>
+                    <div class="deal-location">Downtown, Colorado Springs, CO</div>
+                    
+                    <div class="deal-stats">
+                        <div class="stat">
+                            <div class="stat-value">$285,000</div>
+                            <div class="stat-label">Purchase Price</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">15.7%</div>
+                            <div class="stat-label">IRR</div>
+                        </div>
+                    </div>
+
+                    <div class="deal-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Property Type:</span>
+                            <span class="detail-value">Condo</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Square Feet:</span>
+                            <span class="detail-value">1,200 sq ft</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Rental Income:</span>
+                            <span class="detail-value">$2,200/month</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Cap Rate:</span>
+                            <span class="detail-value">9.3%</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn">View Details</a>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">🏠</div>
+                <div class="deal-content">
+                    <div class="deal-title">Westminster Investment</div>
+                    <div class="deal-location">Legacy Ridge, Westminster, CO</div>
+                    
+                    <div class="deal-stats">
+                        <div class="stat">
+                            <div class="stat-value">$525,000</div>
+                            <div class="stat-label">Purchase Price</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">17.4%</div>
+                            <div class="stat-label">IRR</div>
+                        </div>
+                    </div>
+
+                    <div class="deal-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Property Type:</span>
+                            <span class="detail-value">Single Family</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Square Feet:</span>
+                            <span class="detail-value">2,100 sq ft</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Rental Income:</span>
+                            <span class="detail-value">$3,400/month</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Cap Rate:</span>
+                            <span class="detail-value">7.8%</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorado Distressed Properties - EquityScoutPro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .filters {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .filters h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .property-image {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .property-content {
+            padding: 1.5rem;
+        }
+
+        .property-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .property-location {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .distress-score {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .distress-high {
+            background: #dc3545;
+            color: white;
+        }
+
+        .distress-medium {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .property-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .property-details {
+            margin-bottom: 1rem;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-label {
+            color: #666;
+        }
+
+        .detail-value {
+            font-weight: 500;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="../index.html" class="logo">EquityScoutPro</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../deals.html">Deals</a></li>
+                <li><a href="../colorado-properties/">CO Properties</a></li>
+                <li><a href="../dashboard.html">Dashboard</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+                <li><a href="../login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>🔥 Colorado Distressed Properties</h1>
+            <p>AI-identified distressed real estate opportunities with high equity potential</p>
+        </div>
+
+        <div class="filters">
+            <h3>Filter Properties</h3>
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <select id="countyFilter">
+                        <option value="">All Counties</option>
+                        <option value="Denver">Denver</option>
+                        <option value="Jefferson">Jefferson</option>
+                        <option value="Boulder">Boulder</option>
+                        <option value="Arapahoe">Arapahoe</option>
+                        <option value="Adams">Adams</option>
+                        <option value="El Paso">El Paso</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select id="distressFilter">
+                        <option value="">All Distress Levels</option>
+                        <option value="high">High (85+)</option>
+                        <option value="medium">Medium (75-84)</option>
+                        <option value="low">Low (<75)</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select id="priceFilter">
+                        <option value="">All Prices</option>
+                        <option value="0-300000">Under $300K</option>
+                        <option value="300000-500000">$300K - $500K</option>
+                        <option value="500000+">Over $500K</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="properties-grid" id="propertiesGrid">
+            <!-- Property 1 -->
+            <div class="property-card" data-county="Denver" data-distress="91" data-price="385000">
+                <div class="property-image">🏠</div>
+                <div class="property-content">
+                    <div class="property-title">1247 Knox Court</div>
+                    <div class="property-location">Denver, CO 80204</div>
+                    
+                    <span class="distress-score distress-high">AI Score: 91</span>
+
+                    <div class="property-stats">
+                        <div class="stat">
+                            <div class="stat-value">$385K</div>
+                            <div class="stat-label">Market Value</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">$175K</div>
+                            <div class="stat-label">Equity Opportunity</div>
+                        </div>
+                    </div>
+
+                    <div class="property-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Property Type:</span>
+                            <span class="detail-value">Single Family</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Tax Delinquency:</span>
+                            <span class="detail-value">24 months</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Foreclosure Stage:</span>
+                            <span class="detail-value">Pre-foreclosure</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Last Sale:</span>
+                            <span class="detail-value">2019 - $210K</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn">View Analysis</a>
+                </div>
+            </div>
+
+            <!-- Property 2 -->
+            <div class="property-card" data-county="Jefferson" data-distress="87" data-price="445000">
+                <div class="property-image">🏡</div>
+                <div class="property-content">
+                    <div class="property-title">8432 Pine Street</div>
+                    <div class="property-location">Arvada, CO 80005</div>
+                    
+                    <span class="distress-score distress-high">AI Score: 87</span>
+
+                    <div class="property-stats">
+                        <div class="stat">
+                            <div class="stat-value">$445K</div>
+                            <div class="stat-label">Market Value</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">$195K</div>
+                            <div class="stat-label">Equity Opportunity</div>
+                        </div>
+                    </div>
+
+                    <div class="property-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Property Type:</span>
+                            <span class="detail-value">Townhome</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Tax Delinquency:</span>
+                            <span class="detail-value">18 months</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Foreclosure Stage:</span>
+                            <span class="detail-value">Notice of Default</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Last Sale:</span>
+                            <span class="detail-value">2020 - $250K</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn">View Analysis</a>
+                </div>
+            </div>
+
+            <!-- Property 3 -->
+            <div class="property-card" data-county="Boulder" data-distress="83" data-price="625000">
+                <div class="property-image">🏠</div>
+                <div class="property-content">
+                    <div class="property-title">2156 Maple Avenue</div>
+                    <div class="property-location">Boulder, CO 80302</div>
+                    
+                    <span class="distress-score distress-medium">AI Score: 83</span>
+
+                    <div class="property-stats">
+                        <div class="stat">
+                            <div class="stat-value">$625K</div>
+                            <div class="stat-label">Market Value</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">$210K</div>
+                            <div class="stat-label">Equity Opportunity</div>
+                        </div>
+                    </div>
+
+                    <div class="property-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Property Type:</span>
+                            <span class="detail-value">Single Family</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Tax Delinquency:</span>
+                            <span class="detail-value">12 months</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Foreclosure Stage:</span>
+                            <span class="detail-value">Tax Lien</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Last Sale:</span>
+                            <span class="detail-value">2018 - $415K</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn">View Analysis</a>
+                </div>
+            </div>
+
+            <!-- Property 4 -->
+            <div class="property-card" data-county="Arapahoe" data-distress="79" data-price="365000">
+                <div class="property-image">🏘️</div>
+                <div class="property-content">
+                    <div class="property-title">9876 Oak Ridge Drive</div>
+                    <div class="property-location">Littleton, CO 80123</div>
+                    
+                    <span class="distress-score distress-medium">AI Score: 79</span>
+
+                    <div class="property-stats">
+                        <div class="stat">
+                            <div class="stat-value">$365K</div>
+                            <div class="stat-label">Market Value</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">$125K</div>
+                            <div class="stat-label">Equity Opportunity</div>
+                        </div>
+                    </div>
+
+                    <div class="property-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Property Type:</span>
+                            <span class="detail-value">Condo</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Tax Delinquency:</span>
+                            <span class="detail-value">8 months</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Foreclosure Stage:</span>
+                            <span class="detail-value">Pre-foreclosure</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Last Sale:</span>
+                            <span class="detail-value">2021 - $240K</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn">View Analysis</a>
+                </div>
+            </div>
+
+            <!-- Property 5 -->
+            <div class="property-card" data-county="Adams" data-distress="85" data-price="295000">
+                <div class="property-image">🏠</div>
+                <div class="property-content">
+                    <div class="property-title">5643 Elm Street</div>
+                    <div class="property-location">Westminster, CO 80031</div>
+                    
+                    <span class="distress-score distress-high">AI Score: 85</span>
+
+                    <div class="property-stats">
+                        <div class="stat">
+                            <div class="stat-value">$295K</div>
+                            <div class="stat-label">Market Value</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">$95K</div>
+                            <div class="stat-label">Equity Opportunity</div>
+                        </div>
+                    </div>
+
+                    <div class="property-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Property Type:</span>
+                            <span class="detail-value">Single Family</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Tax Delinquency:</span>
+                            <span class="detail-value">20 months</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Foreclosure Stage:</span>
+                            <span class="detail-value">Notice of Sale</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Last Sale:</span>
+                            <span class="detail-value">2019 - $200K</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn">View Analysis</a>
+                </div>
+            </div>
+
+            <!-- Property 6 -->
+            <div class="property-card" data-county="El Paso" data-distress="76" data-price="275000">
+                <div class="property-image">🏡</div>
+                <div class="property-content">
+                    <div class="property-title">3421 Cascade Avenue</div>
+                    <div class="property-location">Colorado Springs, CO 80907</div>
+                    
+                    <span class="distress-score distress-medium">AI Score: 76</span>
+
+                    <div class="property-stats">
+                        <div class="stat">
+                            <div class="stat-value">$275K</div>
+                            <div class="stat-label">Market Value</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">$85K</div>
+                            <div class="stat-label">Equity Opportunity</div>
+                        </div>
+                    </div>
+
+                    <div class="property-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Property Type:</span>
+                            <span class="detail-value">Duplex</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Tax Delinquency:</span>
+                            <span class="detail-value">15 months</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Foreclosure Stage:</span>
+                            <span class="detail-value">Tax Lien</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Last Sale:</span>
+                            <span class="detail-value">2020 - $190K</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn">View Analysis</a>
+                </div>
+            </div>
+
+            <!-- Property 7 -->
+            <div class="property-card" data-county="Denver" data-distress="88" data-price="425000">
+                <div class="property-image">🏢</div>
+                <div class="property-content">
+                    <div class="property-title">7892 Broadway</div>
+                    <div class="property-location">Denver, CO 80221</div>
+                    
+                    <span class="distress-score distress-high">AI Score: 88</span>
+
+                    <div class="property-stats">
+                        <div class="stat">
+                            <div class="stat-value">$425K</div>
+                            <div class="stat-label">Market Value</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">$165K</div>
+                            <div class="stat-label">Equity Opportunity</div>
+                        </div>
+                    </div>
+
+                    <div class="property-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Property Type:</span>
+                            <span class="detail-value">Multi-Family</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Tax Delinquency:</span>
+                            <span class="detail-value">22 months</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Foreclosure Stage:</span>
+                            <span class="detail-value">Pre-foreclosure</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Last Sale:</span>
+                            <span class="detail-value">2018 - $260K</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn">View Analysis</a>
+                </div>
+            </div>
+
+            <!-- Property 8 -->
+            <div class="property-card" data-county="Jefferson" data-distress="71" data-price="355000">
+                <div class="property-image">🏠</div>
+                <div class="property-content">
+                    <div class="property-title">4567 Mountain View</div>
+                    <div class="property-location">Lakewood, CO 80215</div>
+                    
+                    <span class="distress-score distress-medium">AI Score: 71</span>
+
+                    <div class="property-stats">
+                        <div class="stat">
+                            <div class="stat-value">$355K</div>
+                            <div class="stat-label">Market Value</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">$70K</div>
+                            <div class="stat-label">Equity Opportunity</div>
+                        </div>
+                    </div>
+
+                    <div class="property-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Property Type:</span>
+                            <span class="detail-value">Single Family</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Tax Delinquency:</span>
+                            <span class="detail-value">6 months</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Foreclosure Stage:</span>
+                            <span class="detail-value">Tax Lien</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Last Sale:</span>
+                            <span class="detail-value">2021 - $285K</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn">View Analysis</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Filter functionality
+        document.getElementById('countyFilter').addEventListener('change', filterProperties);
+        document.getElementById('distressFilter').addEventListener('change', filterProperties);
+        document.getElementById('priceFilter').addEventListener('change', filterProperties);
+
+        function filterProperties() {
+            const countyFilter = document.getElementById('countyFilter').value;
+            const distressFilter = document.getElementById('distressFilter').value;
+            const priceFilter = document.getElementById('priceFilter').value;
+            
+            const properties = document.querySelectorAll('.property-card');
+            
+            properties.forEach(property => {
+                let show = true;
+                
+                // County filter
+                if (countyFilter && property.dataset.county !== countyFilter) {
+                    show = false;
+                }
+                
+                // Distress filter
+                if (distressFilter) {
+                    const distressScore = parseInt(property.dataset.distress);
+                    if (distressFilter === 'high' && distressScore < 85) show = false;
+                    if (distressFilter === 'medium' && (distressScore < 75 || distressScore >= 85)) show = false;
+                    if (distressFilter === 'low' && distressScore >= 75) show = false;
+                }
+                
+                // Price filter
+                if (priceFilter) {
+                    const price = parseInt(property.dataset.price);
+                    if (priceFilter === '0-300000' && price >= 300000) show = false;
+                    if (priceFilter === '300000-500000' && (price < 300000 || price >= 500000)) show = false;
+                    if (priceFilter === '500000+' && price < 500000) show = false;
+                }
+                
+                property.style.display = show ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
